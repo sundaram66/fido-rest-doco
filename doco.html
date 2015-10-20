@@ -129,7 +129,7 @@
                                 </ul>
                             </p>
                             <p>
-                                All entities in IdentityX have an ID and a HREF. Generally the HREF is used in IdentityX to identify the entities. This HREF provides the base URL plus the entity type, such as users, authenticationRequests or applications, and the unique identifier of the entity (the ID). For example, a HREF for a sample user might be:
+                                All entities in IdentityX have ID and href attributes. Generally the href attribute is used in IdentityX to identify the entities. This href attribute provides the base URL plus the entity type, such as users, authenticationRequests or applications, and the unique identifier of the entity (the ID). For example, an href attribute for a sample user might be:
                                 <ul>
                                     <li>
                                         <url>https://tenant.domain.com/IdentityXServices/rest/v1/users/QTAzN9Yht3IL-Q714vX0tJyMgQ</url>
@@ -173,14 +173,14 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <h1>5. Versioning</h1>
-                            <p>The current version of the IdentityX REST API is v1. This version number will be changed for subsequent releases. But the previous versions will still be supported by the server until deprecated at a suitable time. The major version of the API is part of the href used to access resources. The following two URLs refer to the same user, however the first will return the version 1 representation of the user and the second will return their version 2 representation of the user (which may have additional properties or other changes): </p>
+                            <p>The current version of the IdentityX REST API is v1. This version number will be changed for subsequent releases. But the previous versions will still be supported by the server until deprecated at a suitable time. The major version of the API is part of the href attribute used to access resources. The following two URLs refer to the same user, however the first will return the version 1 representation of the user and the second will return their version 2 representation of the user (which may have additional properties or other changes): </p>
                             <p>
                                 <url>https://tenant.domain.com/IdentityXServices/rest/v1/users/QTAzN9Yht3IL-Q714vX0tJyMgQ</url>
                             </p>
                             <p>
                                 <url>https://tenant.domain.com/IdentityXServices/rest/v2/users/QTAzN9Yht3IL-Q714vX0tJyMgQ</url>
                             </p>
-                            <blockquote><strong>NOTE:</strong> It is strongly recommended that if external systems are storing the identifiers of IdentityX entities, the id of the entity should be stored rather than the href as the href may change over time as the system location and version of IdentityX may change.</blockquote>
+                            <blockquote><strong>NOTE:</strong> It is strongly recommended that if external systems are storing the identifiers of IdentityX entities, the id of the entity should be stored rather than the href attribute as this href attribute may change over time as the system location and version of IdentityX may change.</blockquote>
                         </div>
                     </div>
                 </section>
@@ -317,7 +317,7 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <h1>8. Links</h1>
-                            <p>Many IdentityX resources are related to other resources and contain links to them in their response properties. A link property is a nested object that contains a href attribute which is the fully qualified location URI of the linked resource. For example, a registration has an associated application and user, and the JSON representation of a registration would contain two link properties such as in the example below:</p>
+                            <p>Many IdentityX resources are related to other resources and contain links to them in their response properties. A link property is a nested object that contains an href attribute which is the fully qualified location URI of the linked resource. For example, a registration has an associated application and user, and the JSON representation of a registration would contain two link properties such as in the example below:</p>
                             <pre><code class="json hljs">
 {
     "href": "https://tenant.domain.com/IdentityXServices/rest/v1/registrations/QZAzX9Yht3IL-Q714vX0tJyAvT",
@@ -392,7 +392,7 @@
                         </code></pre>
                             <h2>9.2 Expansion when requesting a collection </h2>
                             <p>When expanding items in a collection resource (for example, authentication requests for a specific user,
-                                <url>https://tenant.domain.com/IdentityXServices/rest/v1/users/QTAzN9Yht3IL-Q714vX0tJyMgQ/authenticationRequests</url>), only instance links of each of the contained items can be expanded (for performance reasons, expanding collections inside of collections is not possible). When a collection is requested, the items themselves are expanded by default. This can be changed by changing the expand attribute of items below to false, which would result in a list of resources with just a href being returned.</p>
+                                <url>https://tenant.domain.com/IdentityXServices/rest/v1/users/QTAzN9Yht3IL-Q714vX0tJyMgQ/authenticationRequests</url>), only instance links of each of the contained items can be expanded (for performance reasons, expanding collections inside of collections is not possible). When a collection is requested, the items themselves are expanded by default. This can be changed by changing the expand attribute of items below to false, which would result in a list of resources with just href attributes being returned.</p>
                             <p><strong>General syntax</strong></p>
                             <pre><code class="json hljs">
 {
@@ -439,7 +439,7 @@
                         <div class="col-lg-12">
                             <h1>10. Sensitive Data</h1>
                             <p>Biometric data is regarded as sensitive data and a special permission is required to be able to view a face photo or listen to voice recordings. When requesting a user, authenticator, or authentication request which has sensitive data, this data will not be returned by default (although associated metadata will be, so you would see the voice phrase that was spoken or match scores for an authentication request). To retrieve the actual sensitive data itself, a query parameter called <i>sensitiveData</i> must be included and set to true and the caller must have the requisite permission.</p>
-                            <p>Retrieving a user who has face and voice samples enrolled without requesting the sensitive data would return JSON such as the segment below. The metadata is returned and a href linking to the location of the raw data is included. If the <i>sensitiveData</i> query parameter is set to true, then a value attribute would also be returned containing the base64-encoded face or voice sample.</p>
+                            <p>Retrieving a user who has face and voice samples enrolled without requesting the sensitive data would return JSON such as the segment below. The metadata is returned and an href attribute linking to the location of the raw data is included. If the <i>sensitiveData</i> query parameter is set to true, then a value attribute would also be returned containing the base64-encoded face or voice sample.</p>
                             <pre><code class="json hljs">
 {
     
