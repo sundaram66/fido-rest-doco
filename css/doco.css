@@ -1,0 +1,106 @@
+#page-content-wrapper {
+    background: #fcfcfc;
+}
+
+.docs-content {
+    padding: 30px 10px 60px;
+    -webkit-font-smoothing: antialiased;
+    -moz-font-smoothing: antialiased;
+    font-family: proxima-nova, "Helvetica Neue", sans-serif;
+    color: #5c666f;
+    font-size: 14px;
+    max-width: 800px;
+    -webkit-font-smoothing: antialiased;
+}
+
+.docs-content p {
+    line-height: 1.4;
+}
+
+.docs-content url {
+    border-radius: 4px;
+    font-size: 90%;
+    padding: 3px 8px;
+    color: #5c666f;
+    background: #eef0f1;
+    font-family: proxima-nova, "Helvetica Neue", sans-serif;
+    -webkit-font-smoothing: antialiased;
+}
+
+.docs-content blockquote {
+    font-size: 15px;
+    padding: 30px;
+    border: 1px solid #e7e9ed;
+    border-radius: 3px;
+    margin: 30px 0;
+    background: #e7e9ed;
+}
+
+.docs-content h1 {
+    font-family: proxima-nova, "Helvetica Neue", sans-serif;
+    font-size: 40px;
+    font-weight: 300;
+    color: #333;
+    -webkit-font-smoothing: antialiased;
+    margin-left: -25px
+}
+
+.docs-content h2 {
+    font-family: proxima-nova, "Helvetica Neue", sans-serif;
+    font-size: 24px;
+    font-weight: 300;
+    color: #333;
+    line-height: 1.3;
+    -webkit-font-smoothing: antialiased;
+    margin-left: -25px
+}
+
+.docs-content h3 {
+    font-family: proxima-nova, "Helvetica Neue", sans-serif;
+    font-size: 18px;
+    font-weight: 300;
+    color: #333;
+    line-height: 1.3;
+    -webkit-font-smoothing: antialiased;
+    margin-left: -25px
+}
+
+.docs-content h4 {
+    font-family: proxima-nova, "Helvetica Neue", sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: #333;
+    line-height: 1.3;
+    -webkit-font-smoothing: antialiased;
+    padding-left: 20px;
+}
+
+
+}
+.sidebar-nav li {
+    font-family: proxima-nova, "Helvetica Neue", sans-serif;
+    -webkit-font-smoothing: antialiased;
+}
+.sidebar-nav a {
+    font-family: proxima-nova, "Helvetica Neue", sans-serif;
+    padding-left: 20px;
+    -webkit-font-smoothing: antialiased;
+}
+.docs-content li,
+p,
+pre {
+    margin: 20px 0;
+    padding-left: 20px;
+}
+.docs-content figcaption {
+    font-weight: 700;
+    margin-top: 4px;
+}
+.docs-content table thead {
+    background: #002060;
+    color: #ffffff;
+    font-weight: 700;
+}
+.textIndent {
+    text-indent: 50px;
+}
