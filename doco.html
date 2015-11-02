@@ -129,7 +129,7 @@
                                 </ul>
                             </p>
                             <p>
-                                All entities in IdentityX have ID and href attributes. Generally the href attribute is used in IdentityX to identify the entities. This href attribute provides the base URL plus the entity type, such as users, authenticationRequests or applications, and the unique identifier of the entity (the ID). For example, an href attribute for a sample user might be:
+                                All entities in IdentityX have ID and href attributes. Generally the href attribute is used in IdentityX to identify the entities. This href attribute is the base URL plus the entity type, such as users, authenticationRequests or applications, and the unique identifier of the entity (the ID). For example, an href attribute for a sample user might be:
                                 <ul>
                                     <li>
                                         <url>https://tenant.domain.com/IdentityXServices/rest/v1/users/QTAzN9Yht3IL-Q714vX0tJyMgQ</url>
@@ -274,19 +274,20 @@
     "first" : null,
     "previous" : null,
     "next" : {
-        "href" : "http://tenant.domain.com/IdentityXServices/rest/v1/users?page=2&limit=20"
+      "href" : "http://tenant.domain.com/IdentityXServices/rest/v1/users?page=2&limit=20"
     },
     "last" : {
-        "href" : "http://tenant.domain.com/IdentityXServices/rest/v1/users?page=25&limit=20"
+      "href" : "http://tenant.domain.com/IdentityXServices/rest/v1/users?page=25&limit=20"
     }
   },
-    "href" : "http://tenant.domain.com/IdentityXServices/rest/v1/users",
-    "items" : [ {
-      /* User resource */
+  "href" : "http://tenant.domain.com/IdentityXServices/rest/v1/users",
+  "items" : [ {
+      "href" : "https://tenant.domain.com/IdentityXServices/rest/v1/users/QTAzN9Yht3IL-Q714vX0tJyMgQ",
+	  "userId" : "JohnSmith123",
+      ...
     },
-    /* More User resources */
-    ]
-}
+    ...
+  ]
 }
                             </code></pre>
                         </div>
@@ -320,28 +321,26 @@
                             <p>Many IdentityX resources are related to other resources and contain links to them in their response properties. A link property is a nested object that contains an href attribute which is the fully qualified location URI of the linked resource. For example, a registration has an associated application and user, and the JSON representation of a registration would contain two link properties such as in the example below:</p>
                             <pre><code class="json hljs">
 {
-    "href": "https://tenant.domain.com/IdentityXServices/rest/v1/registrations/QZAzX9Yht3IL-Q714vX0tJyAvT",
-    "registrationId": "2466912",
-    /* other elements to be expanded */
-    "user": {
-        "href": "https://tenant.domain.com/IdentityXServices/rest/v1/users/QTAzN9Yht3IL-Q714vX0tJyMgQ"
-    },
-    "application": {
-        "href": "https://tenant.domain.com/IdentityXServices/rest/v1/applications/WtRzN9Zht52L-K886vX0tJyDfF"
-    }
+  "href": "https://tenant.domain.com/IdentityXServices/rest/v1/registrations/QZAzX9Yht3IL-Q714vX0tJyAvT",
+  "registrationId": "2466912",
+  ...
+  "user": {
+    "href": "https://tenant.domain.com/IdentityXServices/rest/v1/users/QTAzN9Yht3IL-Q714vX0tJyMgQ"
+  },
+  "application": {
+    "href": "https://tenant.domain.com/IdentityXServices/rest/v1/applications/WtRzN9Zht52L-K886vX0tJyDfF"
+  }
 }
                         </code></pre>
                             <p>The two links above are referred to as Instance links, as they refer to a specific instance of another resource. The other type of link is a Collection link which is the location of a related collection of resources, for example, the authentication requests related to a specific user. In this scenario, the user representation below would have an <i>authenticationRequests</i> link attribute:</p>
                             <pre><code class="json hljs">
 {
-    
-"href": "https://tenant.domain.com/IdentityXServices/rest/v1/users/QTAzN9Yht3IL-Q714vX0tJyMgQ",
-    "userId": "SteveSmith476",
-    "...other user attributes
-": "",
-    "authenticationRequests": {
-        "href": "https://tenant.domain.com/IdentityXServices/rest/v1/users/QTAzN9Yht3IL-Q714vX0tJyMgQ/authenticationRequests"
-    }
+  "href": "https://tenant.domain.com/IdentityXServices/rest/v1/users/QTAzN9Yht3IL-Q714vX0tJyMgQ",
+  "userId": "SteveSmith476",
+  ...
+  "authenticationRequests": {
+    "href": "https://tenant.domain.com/IdentityXServices/rest/v1/users/QTAzN9Yht3IL-Q714vX0tJyMgQ/authenticationRequests"
+  }
 }
                         </code></pre>
                             <p>Many of these links can be expanded inline via a request parameter - see Expanding Resources below.</p>
@@ -361,33 +360,24 @@
                             <p><strong>General syntax</strong></p>
                             <pre><code class="json hljs">
 {
-"{element}":     
-    {
+  "{element}": {
     "expand": true,      
     "page": integer,       /* only applies to collection links, and optional with default 1 */      
     "limit": integer       /* only applies to collection links, and optional with default 20 */ 
-    }
-    /* other elements to be expanded */
+  },
+  ...
 }
                         </code></pre>
-                            <p>The example below is for expanding a registration resource. Registration contains links to user and application resources and an <i>authenticationRequests</i> collection. To expand the related user and authentication requests (but not application) while changing the default page size to 40, the following JSON object could be used:</p>
+                            <p>The example below is for expanding a registration resource. Registration contains links to user and application resources and an <i>authenticationRequests</i> collection. To expand the related user and authentication requests (but not application) while changing the page size to 40, the following JSON object could be used:</p>
                             <pre><code class="json hljs">
 {
-    
-"user": {
-        
-"expand": true
-
-    },
-    
-"authenticationRequests": {
-        
-"expand": true,
-        
-"limit": 40
-
-    }
-
+  "user": {
+    "expand": true
+  },
+  "authenticationRequests": {
+    "expand": true,
+    "limit": 40
+  }
 }
                         </code></pre>
                             <h2>9.2 Expansion when requesting a collection </h2>
@@ -396,37 +386,29 @@
                             <p><strong>General syntax</strong></p>
                             <pre><code class="json hljs">
 {
-
-"items": 
-    {
-        "expand": true/false, /* false if default of auto-expanding items was not required */      
-        "{element}": {
-            "expand": true,
-            "page": integer, /* optional with default 1 */
-            "limit": Integer /* optional with default 20 */
-            }
-        
-        /* other elements within items to be expanded */
-    }
-
+  "items": {
+    "expand": true/false, /* false if default of auto-expanding items was not required */      
+    "{element}": {
+      "expand": true,
+      "page": integer, /* optional with default 1 */
+      "limit": Integer /* optional with default 20 */
+    },
+    ...
+  }
 }
                     </code></pre>
                             <p>The example below is for expanding authentication request resources in a collection. Authentication request contains links to user, application, registration and policy. To expand user and application, the following JSON could be used:</p>
                             <pre><code class="json hljs">
 {
-
-    "items": {
-        "expand": true,
-        "user": {
-
-            "expand": true
-            },
-        "application": {
-
-            "expand": true
-            }
-        }
-
+  "items": {
+    "expand": true,
+    "user": {
+      "expand": true
+    },
+    "application": {
+      "expand": true
+    }
+  }
 }
                     </code></pre>
                         </div>
@@ -442,38 +424,23 @@
                             <p>Retrieving a user who has face and voice samples enrolled without requesting the sensitive data would return JSON such as the segment below. The metadata is returned and an href attribute linking to the location of the raw data is included. If the <i>sensitiveData</i> query parameter is set to true, then a value attribute would also be returned containing the base64-encoded face or voice sample.</p>
                             <pre><code class="json hljs">
 {
-    
-“face”: {
-        
-“imageType”: “JPG”,
-        
-“sensitiveData”: {
-            
-“href”: “http: //tenant.domain.com/RESTProxy/rest/v1/users/QTAzLpKgcUmABUWXttePCuD8Ew/sensitiveData/34342e3132303030”
-
-        }
-
+  "face": {
+    "imageType": "JPG",
+    "sensitiveData": {
+      "href": "http: //tenant.domain.com/RESTProxy/rest/v1/users/QTAzLpKgcUmABUWXttePCuD8Ew/sensitiveData/34342e3132303030"
+    }
+  },
+  "voiceTextDependent": [
+    {
+      "format": "WAV",
+      "utterance": "My identity is secure because my voice is my passport, verify me.",
+      "backgroundModelName": "EnUsP101MDFull",
+      "sensitiveData": {
+        "href": "http: //tenant.domain.com/RESTProxy/rest/v1/users/QTAzLpKgcUmABUWXttePCuD8Ew/sensitiveData/34342e3132303031"
+      }
     },
-    
-“voiceTextDependent”: [
-        {
-            
-“format”: “WAV”,
-            “utterance”: “My identity is secure because my voice is my passport, verify me.”,
-            “backgroundModelName”: “EnUsP101MDFull”,
-            
-“sensitiveData”: {
-                
-“href”: “http: //tenant.domain.com/RESTProxy/rest/v1/users/QTAzLpKgcUmABUWXttePCuD8Ew/sensitiveData/34342e3132303031”
-
-            }
-
-        },
-        {
-            /* other voice samples */
-        }
-    ]
-
+    ...
+  ]
 }
                         </code></pre>
                         </div>
@@ -588,10 +555,10 @@
                         <p>HTTP/1.1 400 Bad Request</p>
                         <pre><code class="json hljs">
 {
-    "httpStatus": 400,
-    "message": "Could not list authenticators",
-    "developerMessage": "Could not sort on field: osVersion - the sortable fields are [authenticatorId, model, make]",
-    "code": 52
+  "httpStatus": 400,
+  "message": "Could not list authenticators",
+  "developerMessage": "Could not sort on field: osVersion - the sortable fields are [authenticatorId, model, make]",
+  "code": 52
 }
                             </code></pre>
                         </div>
