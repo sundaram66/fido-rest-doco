@@ -172,9 +172,11 @@
   color: #666666;
   border-bottom: 1px solid #999999;
 }
+
 .swagger-section .swagger-ui-wrap table tbody tr:last-child td {
   border-bottom: none;
 }
+
 .swagger-section .swagger-ui-wrap table tbody tr.offset {
   background-color: #f0f0f0;
 }
@@ -422,7 +424,9 @@
 }
 .swagger-section .swagger-ui-wrap .model-signature .description .propWrap .optionsWrapper .optionName {
   font-weight: bold;
+
 }
+
 .swagger-section .swagger-ui-wrap .model-signature .propName {
   font-weight: bold;
 }
