@@ -102,7 +102,7 @@
     font-family: sans-serif;
     background: #343131;
     background-repeat: no-repeat;
-    background-image: url('../images/IdentityX_Logo_240.png');
+    background-image: url('../../images/identityx_Logo_240.png');
 }
 
 .sidebar-nav > .sidebar-brand a {
