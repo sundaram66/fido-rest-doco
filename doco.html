@@ -1,577 +1,78 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <title>API Documentation</title>
-    <script src='lib/jquery.js' type='text/javascript'></script>
-    <!-- Bootstrap Core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <!-- highlight - view JSON all nice -->
-    <link href="styles/github.css" rel="stylesheet">
-    <script src='lib/highlight.js' type='text/javascript'></script>
-    <!-- initialize the highlighter -->
-    <!-- Custom CSS -->
-    <link href="css/simple-sidebar.css" rel="stylesheet">
-    <link href="css/index.css" rel="stylesheet" type='text/css' />
-    <link href='css/standalone.css' rel='stylesheet' type='text/css' />
-    <link href='css/explorer.css' rel='stylesheet' type='text/css' />
-    <!-- <link href='css/common.css' rel='stylesheet' type='text/css' /> -->
-    <link href='css/doco.css' rel='stylesheet' type='text/css' />
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-</head>
+    <head>
+        <meta http-equiv="Refresh" content="10;URL=https://daoninc.github.io/identityx-rest-api-doco/doco.html">
+        <meta charset="UTF-8">
+        <title>PLEASE NOTE NEW ADDRESS</title>
+        <meta name="description" content="The IdentityX REST API documentation has moved. Please note the change of address.">
+        <!-- Mobile Specific Meta -->
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!--[if IE]><meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'><![endif]-->
+        <link href='http://fonts.googleapis.com/css?family=Noto+Sans:400,700' rel='stylesheet' type='text/css'>
+        <style>
+            body {
+                font-family: 'Noto Sans', Arial, serif;
+                font-weight: 400;
+                -webkit-font-smoothing: antialiased;
+                -moz-osx-font-smoothing: grayscale;
+                line-height: 1.618em;
+                background: #464646 url('bkg.jpg') center center no-repeat fixed;
+                background-size: cover;
+            }
+            
+            h2 {
+                font-family: 'Noto Sans', Arial, serif;
+                font-weight: 700;
+                font-size: 40px;
+                line-height: 1.618em;
+            }
+            
+            section {
+                max-width: 800px;
+                margin: 8% auto 1em auto;
+                background-color: #222;
+                opacity: 0.8;
+                filter: alpha(opacity=80);
+                /* For IE8 and earlier */
+                color: #fff;
+                padding: 1em 5%;
+            }
+            
+            a {
+                color: #00CC66;
+            }
+            
+            a:focus {
+                outline: none;
+                outline-offset: inherit;
+            }
+            
+            @media (max-device-width: 1027px) {
+                body {
+                    text-align: center;
+                    font-size: larger;
+                }
+                section {
+                    max-width: 90%;
+                }
+            }
+            
+            @media (max-device-width: 640px) {
+                section {
+                    max-width: 97%;
+                }
+            }
+        </style>
+    </head>
 
-<body>
-   
-    <script>
-    hljs.initHighlightingOnLoad();
-    </script>
-    <div id="wrapper">
-        <!-- Sidebar -->
-        <div id="sidebar-wrapper">
-            <ul class="sidebar-nav">
-                <li class="sidebar-brand">
-                </li>
-                <li>
-                    <a href="#introduction">1. Introduction</a>
-                </li>
-                <li>
-                    <a href="#baseurl">2. Base URL</a>
-                </li>
-                <li>
-                    <a href="#authentication">3. Authentication</a>
-                </li>
-                <li>
-                    <a href="#search">4. Search</a>
-                </li>
-                <li>
-                    <a href="#versioning">5. Versioning</a>
-                </li>
-                <li>
-                    <a href="#pagination">6. Resources and Pagination</a>
-                </li>
-                <li>
-                    <a href="#sorting">7. Sorting</a>
-                </li>
-                <li>
-                    <a href="#links">8. Links</a>
-                </li>
-                <li>
-                    <a href="#expanding">9. Expanding Resources</a>
-                </li>
-                <li>
-                    <a href="#sensitive">10. Sensitive Data</a>
-                </li>
-                <li>
-                    <a href="#metadata">11. Permission Metadata</a>
-                </li>
-                <li>
-                    <a href="#errors">12. Errors</a>
-                </li>
-                <li>
-                    <a href="index.html" class="lastItem">> API Explorer</a>
-                </li>
-            </ul>
-        </div>
-        <!-- /#sidebar-wrapper -->
-        <!-- Page Content -->
-        <div id="page-content-wrapper">
-            <div class="container-fluid docs-content">
-                <!-- INTRODUCTION -->
-                <a name="introduction"></a>
-                <div class="row">
-                    <div class="col-lg-12">
-                        <h1>1. Introduction</h1>
-                        <p>The API is a REST-based API for communicating with the IdentityX system. It has predictable, resource-oriented URLs, and uses HTTP response codes to indicate errors. For error conditions, more specific IdentityX error codes are also included to give more information about the error. All responses from the API are in JSON format. These REST services are secured by digest authentication to guarantee authentication, integrity, and non-repudiation of the messages transferred. Daon supplies Java and JavaScript SDKs which wrap the digest generation and the specifics of calling the REST services and present a language-specific interface for relying party developers to use in developing their applications. The REST API is provided for relying parties to interact with the IdentityX FIDO UAF v1.0 functionality and supports all FIDO operations; Registration, Authentication, Transaction Confirmation, and Deregistration. The API also exposes the same capabilities as the SOAP operations in the existing Admin and Service Provider Gateways. </p>
-                        <!-- <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Menu</a> -->
-                    </div>
-                </div>
-                <!-- INTRODUCTION END -->
-                <!-- BASE URL -->
-                <section id="baseurl">
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <h1>2. Base URL</h1>
-                            <p>In IdentityX, the URL specifies the tenant that the request relates to, or the system if the request is at a system level. This tenant is indicated by a sub-domain on the URL of the system. Examples:
-                            </p>
-                            <p>
-                                <ul>
-                                    <li>
-                                        <url>https://tenant1.identityx-fido.com/IdentityXServices/rest/v1</url> would be the base URL for a tenant with a domain identifier of tenant1.</li>
-                                    <li>
-                                        <url>https://tenant2.identityx-fido.com/IdentityXServices/rest/v1</url> would be the base URL for a tenant with a domain identifier of tenant2.</li>
-                                </ul>
-                            </p>
-                            <p>The following sample base URL is used in the sections below:
-                                <ul>
-                                    <li>
-                                        <url>https://tenant.domain.com/IdentityXServices/rest/v1</url>
-                                    </li>
-                                </ul>
-                            </p>
-                            <p>
-                                All entities in IdentityX have ID and href attributes. Generally the href attribute is used in IdentityX to identify the entities. This href attribute is the base URL plus the entity type, such as users, authenticationRequests or applications, and the unique identifier of the entity (the ID). For example, an href attribute for a sample user might be:
-                                <ul>
-                                    <li>
-                                        <url>https://tenant.domain.com/IdentityXServices/rest/v1/users/QTAzN9Yht3IL-Q714vX0tJyMgQ</url>
-                                    </li>
-                                </ul>
-                            </p>
-                        </div>
-                    </div>
-                </section>
-                <!-- BASE URL END -- >
-
-<!--  AUTHENTICATION -->
-                <section id="authentication">
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <h1>3. Authentication</h1>
-                            <p>Requests to the IdentityX REST API are required to be signed. This signing is used to provide authentication, integrity, and non-repudiation. The messages are signed by attaching a HMAC to each request. This HMAC is generated by a token which has been issued to the client by the server.The HMAC is calculated over the body of the request as well as HTTP headers and also includes a nonce and timestamp to prevent replay attacks. Daon supplies SDKs in Java and Javascript which do this signing process. The IdentityX services add a HMAC to the REST responses as well and the client can verify that this matches the HMAC calculated on the response with the client’s shared secret. The signing process is also detailed in the following document if a developer wants to develop their own solution: </p>
-                            <p><i>IdentityX 4.0 QRG – Authenticating to REST Services</i></p>
-                            <p><strong> NOTE: All API requests must be made over HTTPS.</strong></p>
-                        </div>
-                    </div>
-                </section>
-                <!-- AUTHENTICATION END -->
-                <!-- SEARCHING -->
-                <section id="search">
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <h1>4. Search</h1>
-                            <p>You can search for a specific resource or resources within a resource collection by using certain query parameters to specify search criteria. Searching is case insensitive and supports an asterisk (*) as a wildcard. Searches are treated as exact (case insensitive) matches if the wildcard is not used. The searchable query parameter(s) are documented on a per operation basis.</p>
-                            <p>Some searches can also be filtered by status using the optional status query parameter. By default resources with any status are returned. If this parameter is included though, then the resources returned can be limited to a particular status such as ACTIVE or ARCHIVED (see individual operations for allowable values).</p>
-                            <p><strong>Example Request:</strong> Searching for users with <code>userId</code> beginning with ‘Steve’ and ACTIVE status:</p>
-                            <p>
-                                <url><code>GET</code> https://tenant.domain.com/IdentityXServices/rest/v1/users?userId=Steve*&status=ACTIVE</url>
-                            </p>
-                        </div>
-                    </div>
-                </section>
-                <!-- SEARCHING END -->
-                <!-- VERSIONING -->
-                <section id="versioning">
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <h1>5. Versioning</h1>
-                            <p>The current version of the IdentityX REST API is v1. This version number will be changed for subsequent releases. But the previous versions will still be supported by the server until deprecated at a suitable time. The major version of the API is part of the href attribute used to access resources. The following two URLs refer to the same user, however the first will return the version 1 representation of the user and the second will return their version 2 representation of the user (which may have additional properties or other changes): </p>
-                            <p>
-                                <url>https://tenant.domain.com/IdentityXServices/rest/v1/users/QTAzN9Yht3IL-Q714vX0tJyMgQ</url>
-                            </p>
-                            <p>
-                                <url>https://tenant.domain.com/IdentityXServices/rest/v2/users/QTAzN9Yht3IL-Q714vX0tJyMgQ</url>
-                            </p>
-                            <blockquote><strong>NOTE:</strong> It is strongly recommended that if external systems are storing the identifiers of IdentityX entities, the id of the entity should be stored rather than the href attribute as this href attribute may change over time as the system location and version of IdentityX may change.</blockquote>
-                        </div>
-                    </div>
-                </section>
-                <!-- END VERSIONING -->
-                <!-- PAGINATION -->
-                <section id="pagination">
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <h1>6. Resources and Pagination</h1>
-                            <p>All top-level IdentityX API resources have support for “list” API methods which return multiple resources in one call. For example, ‘all users with a userId starting with Steve’ or ‘all authentication requests involving a specific user’. These API methods return a Collection Resource, which is a resource containing an array of other resources such as users or applications. A request may return a large number of resources, so pagination is used to break up the results into one or more pages. </p>
-                            <p>The metadata attribute of a Collection Resource contains information such as the total count of resources in the collection, the current page and limit per page. The paging attribute has links to the first, previous, next and last pages in the collection. These links will be null if they represent the current page, such that if the current page is the first page then the first and previous links will be null (much as the first and previous buttons on a UI would be disabled in this case). Likewise, the next and last links will point to the appropriate pages assuming there are multiple pages in the collection.</p>
-                            <h2>6.1 Collection Resource</h2>
-                            <center>
-                                <table class="table table-striped" style="width: 80%;">
-                                    <thead>
-                                        <tr>
-                                            <th style="width: 20%;">Attribute</th>
-                                            <th>Description</th>
-                                            <th style="width: 20%;">Type</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td id="href">href</td>
-                                            <td>The fully qualified location URI of the Collection Resource </td>
-                                            <td>String</td>
-                                        </tr>
-                                        <tr>
-                                            <td id="collectionMetadata">metadata</td>
-                                            <td>Collection metadata</td>
-                                            <td>Object</td>
-                                        </tr>
-                                        <tr>
-                                            <td id="page">page</td>
-                                            <td>The page number in the collection these resources represent.</td>
-                                            <td>Integer</td>
-                                        </tr>
-                                        <tr>
-                                            <td id="limit">limit</td>
-                                            <td>The maximum number of resources to return in one request.</td>
-                                            <td>Integer</td>
-                                        </tr>
-                                        <tr>
-                                            <td id="totalCount">totalCount</td>
-                                            <td>The total number of resources in the collection.</td>
-                                            <td>Integer</td>
-                                        </tr>
-                                        <tr>
-                                            <td id="paging">paging</td>
-                                            <td>Links to first, previous, next and last pages in the collection.</td>
-                                            <td>Object</td>
-                                        </tr>
-                                        <tr>
-                                            <td id="first">first</td>
-                                            <td>The location of the first page in the collection. This will be null if there is only one page, or if the current page is also the first page.</td>
-                                            <td>String</td>
-                                        </tr>
-                                        <tr>
-                                            <td id="previous">previous</td>
-                                            <td>The location of the previous page in the collection. This will be null if there is only one page, or if the current page is also the first page.</td>
-                                            <td>String</td>
-                                        </tr>
-                                        <tr>
-                                            <td id="next">next</td>
-                                            <td>The location of the next page in the collection. This will be null if there is only one page, or if the current page is also the last page.</td>
-                                            <td>String</td>
-                                        </tr>
-                                        <tr>
-                                            <td id="last">last</td>
-                                            <td>The location of the last page in the collection. This will be null if there is only one page, or if the current page is also the last page.</td>
-                                            <td>String</td>
-                                        </tr>
-                                        <tr>
-                                            <td id="items">items</td>
-                                            <td>An array containing the current page of resources.</td>
-                                            <td>Array</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </center>
-                            <p><strong>Example Response:</strong> Listing all users:</p>
-                            <p>The metadata section shows this is the first page of twenty, with 485 users in total. This is the first page in the collection so the first and previous links are null; the next and last links show URIs for the respective next and last pages.</p>
-                            <pre><code class="json hljs">
-{
-  "metadata" : {
-    "limit" : 20,
-    "page" : 1,
-    "totalCount" : 485
-  },
-  "paging" : {
-    "first" : null,
-    "previous" : null,
-    "next" : {
-      "href" : "http://tenant.domain.com/IdentityXServices/rest/v1/users?page=2&limit=20"
-    },
-    "last" : {
-      "href" : "http://tenant.domain.com/IdentityXServices/rest/v1/users?page=25&limit=20"
-    }
-  },
-  "href" : "http://tenant.domain.com/IdentityXServices/rest/v1/users",
-  "items" : [ {
-      "href" : "https://tenant.domain.com/IdentityXServices/rest/v1/users/QTAzN9Yht3IL-Q714vX0tJyMgQ",
-	  "userId" : "JohnSmith123",
-      ...
-    },
-    ...
-  ]
-}
-                            </code></pre>
-                        </div>
-                    </div>
-                </section>
-                <!-- END PAGINATION -->
-                <!-- SORTING -->
-                <section id="sorting">
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <h1>7. Sorting</h1>
-                            <p>A request for a collection resource can contain optional <i>sortField</i> and <i>sortAscending</i> parameters:</p>
-                            <ul>
-                                <li><i>sortField</i> – the name of the property the returned resources should be sorted by. Allowable values are specified on a per operation basis in the documentation.</li>
-                                <li><i>sortAscending</i> – true or false</li>
-                            </ul>
-                            <p>Every request returning a collection has a default sort field and direction. The default direction depends on the default sort field – generally <i>sortAscending</i> defaults to true when the default <i>sortField</i> is a text property, but if the default <i>sortField</i> is a date then <i>sortAscending</i> is defaulted to false to show the most recent entries at the top.</p>
-                            <p><strong>Example Request:</strong> Returning users sorted by most recent creation date:</p>
-                            <p>
-                                <url><code>GET</code> https://tenant.domain.com/IdentityXServices/rest/v1/users?sortField=created&sortAscending=false</url>
-                            </p>
-                        </div>
-                    </div>
-                </section>
-                <!-- VERSIONING END -->
-                <!-- LINKS -->
-                <section id="links">
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <h1>8. Links</h1>
-                            <p>Many IdentityX resources are related to other resources and contain links to them in their response properties. A link property is a nested object that contains an href attribute which is the fully qualified location URI of the linked resource. For example, a registration has an associated application and user, and the JSON representation of a registration would contain two link properties such as in the example below:</p>
-                            <pre><code class="json hljs">
-{
-  "href": "https://tenant.domain.com/IdentityXServices/rest/v1/registrations/QZAzX9Yht3IL-Q714vX0tJyAvT",
-  "registrationId": "2466912",
-  ...
-  "user": {
-    "href": "https://tenant.domain.com/IdentityXServices/rest/v1/users/QTAzN9Yht3IL-Q714vX0tJyMgQ"
-  },
-  "application": {
-    "href": "https://tenant.domain.com/IdentityXServices/rest/v1/applications/WtRzN9Zht52L-K886vX0tJyDfF"
-  }
-}
-                        </code></pre>
-                            <p>The two links above are referred to as Instance links, as they refer to a specific instance of another resource. The other type of link is a Collection link which is the location of a related collection of resources, for example, the authentication requests related to a specific user. In this scenario, the user representation below would have an <i>authenticationRequests</i> link attribute:</p>
-                            <pre><code class="json hljs">
-{
-  "href": "https://tenant.domain.com/IdentityXServices/rest/v1/users/QTAzN9Yht3IL-Q714vX0tJyMgQ",
-  "userId": "SteveSmith476",
-  ...
-  "authenticationRequests": {
-    "href": "https://tenant.domain.com/IdentityXServices/rest/v1/users/QTAzN9Yht3IL-Q714vX0tJyMgQ/authenticationRequests"
-  }
-}
-                        </code></pre>
-                            <p>Many of these links can be expanded inline via a request parameter - see Expanding Resources below.</p>
-                        </div>
-                    </div>
-                </section>
-                <!-- LINKS END -->
-                <!-- EXPANDING -->
-                <section id="expanding">
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <h1>9. Expanding Resources</h1>
-                            <p>When retrieving a resource with the IdentityX API, you can request that the server return not only that resource but also one or more of its related (linked) resources. For example, when requesting a registration, you can get back its associated application and user at the same time to save on having to issue multiple separate requests. Expansion is requested via the expand query parameter with the value being a URL-encoded (and preferably minified) JSON object. The syntax is slightly different depending on whether you are expanding links in a single instance (on a ‘get’) or in a collection (on a ‘list’).</p>
-                            <h2>9.1 Expansion when requesting a single resource</h2>
-                            <p>When expanding items in a single resource (for example, single registration,
-                                <url>https://tenant.domain.com/IdentityXServices/rest/v1/registrations/QTAzN9Yht3IL-Q714vX0tJyMgA</url>), both instance links and collection links can be expanded. When expanding a collection link you can request a certain page or change the number of items returned using the page and limit attributes respectively. These attributes are not applicable when expanding an instance link.</p>
-                            <p><strong>General syntax</strong></p>
-                            <pre><code class="json hljs">
-{
-  "{element}": {
-    "expand": true,      
-    "page": integer,       /* only applies to collection links, and optional with default 1 */      
-    "limit": integer       /* only applies to collection links, and optional with default 20 */ 
-  },
-  ...
-}
-                        </code></pre>
-                            <p>The example below is for expanding a registration resource. Registration contains links to user and application resources and an <i>authenticationRequests</i> collection. To expand the related user and authentication requests (but not application) while changing the page size to 40, the following JSON object could be used:</p>
-                            <pre><code class="json hljs">
-{
-  "user": {
-    "expand": true
-  },
-  "authenticationRequests": {
-    "expand": true,
-    "limit": 40
-  }
-}
-                        </code></pre>
-                            <h2>9.2 Expansion when requesting a collection </h2>
-                            <p>When expanding items in a collection resource (for example, authentication requests for a specific user,
-                                <url>https://tenant.domain.com/IdentityXServices/rest/v1/users/QTAzN9Yht3IL-Q714vX0tJyMgQ/authenticationRequests</url>), only instance links of each of the contained items can be expanded (for performance reasons, expanding collections inside of collections is not possible). When a collection is requested, the items themselves are expanded by default. This can be changed by changing the expand attribute of items below to false, which would result in a list of resources with just href attributes being returned.</p>
-                            <p><strong>General syntax</strong></p>
-                            <pre><code class="json hljs">
-{
-  "items": {
-    "expand": true/false, /* false if default of auto-expanding items was not required */      
-    "{element}": {
-      "expand": true,
-      "page": integer, /* optional with default 1 */
-      "limit": Integer /* optional with default 20 */
-    },
-    ...
-  }
-}
-                    </code></pre>
-                            <p>The example below is for expanding authentication request resources in a collection. Authentication request contains links to user, application, registration and policy. To expand user and application, the following JSON could be used:</p>
-                            <pre><code class="json hljs">
-{
-  "items": {
-    "expand": true,
-    "user": {
-      "expand": true
-    },
-    "application": {
-      "expand": true
-    }
-  }
-}
-                    </code></pre>
-                        </div>
-                    </div>
-                </section>
-                <!-- EXPANDING END -->
-                <!-- SENSITIVE DATA -->
-                <section id="sensitive">
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <h1>10. Sensitive Data</h1>
-                            <p>Biometric data is regarded as sensitive data and a special permission is required to be able to view a face photo or listen to voice recordings. When requesting a user, authenticator, or authentication request which has sensitive data, this data will not be returned by default (although associated metadata will be, so you would see the voice phrase that was spoken or match scores for an authentication request). To retrieve the actual sensitive data itself, a query parameter called <i>sensitiveData</i> must be included and set to true and the caller must have the requisite permission.</p>
-                            <p>Retrieving a user who has face and voice samples enrolled without requesting the sensitive data would return JSON such as the segment below. The metadata is returned and an href attribute linking to the location of the raw data is included. If the <i>sensitiveData</i> query parameter is set to true, then a value attribute would also be returned containing the base64-encoded face or voice sample.</p>
-                            <pre><code class="json hljs">
-{
-  "face": {
-    "imageType": "JPG",
-    "sensitiveData": {
-      "href": "http: //tenant.domain.com/RESTProxy/rest/v1/users/QTAzLpKgcUmABUWXttePCuD8Ew/sensitiveData/34342e3132303030"
-    }
-  },
-  "voiceTextDependent": [
-    {
-      "format": "WAV",
-      "utterance": "My identity is secure because my voice is my passport, verify me.",
-      "backgroundModelName": "EnUsP101MDFull",
-      "sensitiveData": {
-        "href": "http: //tenant.domain.com/RESTProxy/rest/v1/users/QTAzLpKgcUmABUWXttePCuD8Ew/sensitiveData/34342e3132303031"
-      }
-    },
-    ...
-  ]
-}
-                        </code></pre>
-                        </div>
-                    </div>
-                </section>
-                <!-- SENSITIVE DATA END -->
-                <!-- METADATA -->
-                <section id="metadata">
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <h1>11. Permission Metadata</h1>
-                            <p>When getting a resource via the API, it is possible to return the other allowed permissions for the calling user on that resource. This is primarily to be used as an aid to application developers in determining whether certain buttons on a user interface should be enabled. For example, if the user has permission to list applications but is not allowed to create a new application then the create application button could be disabled, rather than allowing a user to create it and then get a permissions error on submission. To include this information in any GET request, a query parameter called <i>includeAuthorizationInfo</i> should be set to true in the request. This will result in an attribute called <i>allowedPermissions</i> being returned which is a comma delimited list of permissions the user has on that specific resource.</p>
-                        </div>
-                    </div>
-                </section>
-                <!-- METADATA END -->
-                <!--  ERRORS -->
-                <section id="errors">
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <h1>12. Errors</h1>
-                            <p>Responses from the REST API use conventional HTTP response status codes to indicate success or failure of an API request. A 200 (or 201 in the case of a new resource being created) is returned on success. Codes in the 4xx range indicate an error with authorization or the information supplied with the request. A 500 code indicates an error with IdentityX’s servers.</p>
-                            <br />
-                            <center>
-                                <table class="table table-striped" style="width: 80%;">
-                                    <thead>
-                                        <tr>
-                                            <th style="width: 30%;">HTTP Status code</th>
-                                            <th>Description</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td id="200">200 - OK</td>
-                                            <td>Success, everything worked as expected</td>
-                                        </tr>
-                                        <tr>
-                                            <td id="201">201 - Created</td>
-                                            <td>Success, new resource created</td>
-                                        </tr>
-                                        <tr>
-                                            <td id="400">400 - Bad Request</td>
-                                            <td>The request was invalid, often missing a required parameter.
-                                                <br />More details in the response body</td>
-                                        </tr>
-                                        <tr>
-                                            <td id="401">401 - Unauthorized</td>
-                                            <td>Authentication credentials were missing or incorrect, or the caller does not have sufficient permission.</td>
-                                        </tr>
-                                        <tr>
-                                            <td id="404">404 - Not Found</td>
-                                            <td>The requested item does not exist, or the URI requested is invalid.</td>
-                                        </tr>
-                                        <tr>
-                                            <td id="405">405 - Method Not Allowed</td>
-                                            <td>A request was made of a resource using a request method not supported by that resource.</td>
-                                        </tr>
-                                        <tr>
-                                            <td id="500">500 - Server Error</td>
-                                            <td>There was an error within the IdentityX Server.</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </center>
-                            <p>If an error occurs, the response body will contain an Error object containing the following information:</p>
-                            <center>
-                                <table class="table table-striped" style="width: 80%;">
-                                    <thead>
-                                        <tr>
-                                            <th style="width: 20%;">Attribute</th>
-                                            <th>Description</th>
-                                            <th style="width: 20%;">Type</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td id="httpStatus">httpStatus</td>
-                                            <td>
-                                                The HTTP response status code
-                                            </td>
-                                            <td>Integer</td>
-                                        </tr>
-                                        <tr>
-                                            <td id="message">message</td>
-                                            <td>
-                                                A simple user-friendly message that could optionally be displayed directly to application end user (but not language-aware)
-                                            </td>
-                                            <td>String</td>
-                                        </tr>
-                                        <tr>
-                                            <td id="developerMessage">developerMessage</td>
-                                            <td>
-                                                A verbose, plain language description of the problem for the app developer with hints about how to fix it
-                                            </td>
-                                            <td>String</td>
-                                        </tr>
-                                        <tr>
-                                            <td id="code">code</td>
-                                            <td>
-                                                An IdentityX-specific error code
-                                            </td>
-                                            <td>Integer</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </center>
-                             <p><strong>Example Request:</strong> Listing authenticators but sorting on an invalid sort field:</p>
-                        <p>
-                            <url><code>GET</code> https://tenant.domain.com/IdentityXServices/rest/v1/authenticators?sortField=osVersionM</url>
-                        </p>
-                        <p><strong>Example Response:</strong></p>
-                        <p>HTTP/1.1 400 Bad Request</p>
-                        <pre><code class="json hljs">
-{
-  "httpStatus": 400,
-  "message": "Could not list authenticators",
-  "developerMessage": "Could not sort on field: osVersion - the sortable fields are [authenticatorId, model, make]",
-  "code": 52
-}
-                            </code></pre>
-                        </div>
-                    </div>
-                </section>
-                <!-- ERRORS END -->
-            </div>
-        </div>
-    </div>
-    <!-- /#page-content-wrapper -->
-    </div>
-    <!-- /#wrapper -->
-    <!-- jQuery -->
-    <script src="lib/jquery.js"></script>
-    <!-- Bootstrap Core JavaScript -->
-    <script src="lib/bootstrap.min.js"></script>
-    <!-- Menu Toggle Script -->
-    <script>
-    $("#menu-toggle").click(function(e) {
-        e.preventDefault();
-        $("#wrapper").toggleClass("toggled");
-    });
-    </script>
-</body>
+    <body>
+        <section>
+            <h2>The IdentityX REST API has moved!</h2>
+            <h3>The new address for this page is :<br><a href="https://daoninc.github.io/identityx-rest-api-doco/doco.html">https://daoninc.github.io/identityx-rest-api-doco/doco.html</a></h3>
+            <h3>...You will be transferred to the new site in a moment...</h3>
+            <p>If you have waited more than a few seconds and you are still seeing this message, please click on the link above! Thank you.</p>
+        </section>
+    </body>
 
 </html>
